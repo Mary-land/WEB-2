@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Lab2</title>
+	<style type="text/css">
+		table, tr, td, th {
+			text-align: center;
+			border-color: black;
+			border-style: solid;
+			border-width: 2px;
+			border-collapse: collapse;
+			margin: auto;
+		}
+
+		a.menu{
+        	text-decoration: none;
+			color: #fff;
+			padding: 5px;
+			font-size: 22px;
+			display: block;
+			background: #f9ad51;
+			width: 150px;
+			text-align: center;
+		}
+
+		nav{
+			position: fixed;
+			margin-top:150px;
+		}
+
+		nav a:hover{
+			color: #000;
+			background: #fff;
+		}
+
+		#col1{
+			margin: 0;
+			width: 150px;
+			height:100%;
+			background: #feead3;
+			position: fixed;
+			float: left;
+			z-index:1;
+		}
+
+		#col2{
+			margin: 0;
+			height: 100%;
+			padding: 10px;
+			margin-left: 150px;
+			background: #fef0cb;
+       	}
+
+		th {
+			background-color: #f9ad51;
+		}
+
+		.pop { visibility:hidden }
+        .go { visibility:visible }
+
+		#but{
+			margin: 10px;
+			text-align: center;
+		}
+
+		#button{
+			background: burlywood;
+		}
+
+		td {
+			padding: 10px;
+		}
+		html, body {
+            margin:0;
+            background: #fef0cb;
+        }
+        header {
+            display: block;
+            position: relative;
+            margin: 0;
+            width= 100%;
+            height=100px;
+            font-size: 0;
+            background: #feead3;
+            z-index:999;
+        }
+        #footer{
+            position: fixed;
+            left: 0; bottom: 0;
+            text-align: center;
+            background: #f9ad51;
+            color: #000;
+            width: 100%;
+            z-index:999;
+        }
+
+        #input{
+        	text-align: center;
+        }
+	</style>
+
+	<script type="text/javascript" src="javas.js" id="java"></script>
+</head>
+
+<body>
+	<div id="col1">
+		<nav>
+			<a class="menu" href = "Lab-2.html">JavaScript</a>
+		</nav>
+		<img src="shariki_2-320.png" width= "160" height="300" vspace="250">
+	</div>
+	<header>
+		<img src="s1515.jpg" width= 100% height="100">
+	</header>
+	<div id="col2">
+    <div id="but">
+	<button onclick="data.refreshTable()" id="button">Refresh</button>
+	<button onclick="data.addRandom()" id="button">Add random</button>
+	<button onclick="data.clear()" id="button">Clear</button>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>AB</th>
+				<th>BC</th>
+				<th>AC</th>
+				<th>Perimeter</th>
+				<th>Area</th>
+				<th>AB^AC</th>
+				<th>AB^BC</th>
+				<th>BC^AC</th>
+				<th>Increase</th>
+				<th>Decrease</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody id="triangles">
+		</tbody>
+	</table>
+	<!--<input id="input" type="text" name="key" placeholder="Введите ключ"></input>-->
+	<script type="text/javascript">data.refreshTable()</script>	
+	<div id="footer">
+        &copy; Мария Баканова
+    </div>
+	</div>
+</body>
+
+</html>
