@@ -1,15 +1,27 @@
-﻿function Triangle(a, b, c) {
+function Triangle(a, b, c) {
 	this.a = a == undefined ? 0.0 : a;
 	this.b = b == undefined ? 0.0 : b;
 	this.c = c == undefined ? 0.0 : c;
 	this.perimeter = function() {
-		return this.a + this.b + this.c;
+		return parseFloat(this.a) + parseFloat(this.b) + parseFloat(this.c);
 	};
 	this.area = function() {
-        return (0.25*Math.sqrt((this.a + this.b + this.c)*(this.a + this.b - this.c)*(this.a + this.c - this.b)*(this.b + this.c - this.a))).toFixed(5);
+        return (0.25*Math.sqrt((parseFloat(this.a) + parseFloat(this.b) + parseFloat(this.c))*(parseFloat(this.a) + parseFloat(this.b) - parseFloat(this.c))*(parseFloat(this.a) + parseFloat(this.c) - parseFloat(this.b))*(parseFloat(this.b) + parseFloat(this.c) - parseFloat(this.a)))).toFixed(5);
 	};
 	this.corn = function(a1,a2,a3) {
         return (Math.acos((a1*a1 + a2*a2 - a3*a3) / (2 * a1*a2)) * 180 / 3.14159265).toFixed(5);
+	};
+	this.IncreaseSide = function (rowIndex){
+			var koef = document.getElementById("increase"+rowIndex).value;
+			this.a = this.a*koef;
+			this.b = this.b*koef;
+			this.c = this.c*koef;
+	};
+	this.DecreaseSide = function (rowIndex){
+			var koef = document.getElementById("decrease"+rowIndex).value;
+			this.a = this.a/koef;
+			this.b = this.b/koef;
+			this.c = this.c/koef;
 	};
 }
 
@@ -32,9 +44,10 @@ function TriangleView(a, b, c) {
 	this.inputincr = function (rowIndex){
 		var view = document.createDocumentFragment();
 		var input = document.createElement("input");
+		var sup = this;
 		input.id = "increase" + rowIndex;
 		input.addEventListener("change", function() {
-			data.IncreaseSide(rowIndex);
+			sup.IncreaseSide(rowIndex);
 		});
 		input.addEventListener("focus", function() {
 			keyBox.style.borderColor = "blue";
@@ -45,9 +58,10 @@ function TriangleView(a, b, c) {
 	this.inputdecr = function (rowIndex){
 		var view = document.createDocumentFragment();
 		var input = document.createElement("input");
+		var sup = this;
 		input.id = "decrease" + rowIndex;
 		input.addEventListener("change", function() {
-			data.DecreaseSide(rowIndex);
+			sup.DecreaseSide(rowIndex);
 		});
 		input.addEventListener("focus", function() {
 			keyBox.style.borderColor = "blue";
@@ -126,11 +140,7 @@ function getRandom() {
 }
 
 var data = {
-	triangles : [
-		new TriangleView(2,2,3),
-		new TriangleView(3,4,5),
-		new TriangleView(10,10,10)
-	],
+	triangles : [],
 	
 	refreshTable : function() {
 		var tableBody = document.getElementById('triangles');
@@ -165,42 +175,11 @@ var data = {
 		this.refreshTable();
 	},
 
-	IncreaseSide : function (rowIndex){
-		var val = document.getElementById("increase"+rowIndex).value;
-		var Size1 = parseInt(document.getElementById("a-"+ rowIndex).innerHTML) * val;
-		document.getElementById ("a-"+ rowIndex).innerHTML = Size1;
-		var Size2 = parseInt(document.getElementById("b-"+ rowIndex).innerHTML) * val;
-		document.getElementById ("b-"+ rowIndex).innerHTML = Size2;
-		var Size3 = parseInt(document.getElementById("c-"+ rowIndex).innerHTML) * val;
-		document.getElementById ("c-"+ rowIndex).innerHTML = Size3;
-		this.ChangeInf(rowIndex);
-		return (newSize3);
-	},
-
-	DecreaseSide : function (rowIndex){
-		var val = document.getElementById("decrease"+rowIndex).value;
-		var Size1 = (parseInt(document.getElementById("a-"+ rowIndex).innerHTML) / val).toFixed(5);
-		document.getElementById ("a-"+ rowIndex).innerHTML = Size1;
-		var Size2 = (parseInt(document.getElementById("b-"+ rowIndex).innerHTML) / val).toFixed(5);
-		document.getElementById ("b-"+ rowIndex).innerHTML = Size2;
-		var Size3 = (parseInt(document.getElementById("c-"+ rowIndex).innerHTML) / val).toFixed(5);
-		document.getElementById ("c-"+ rowIndex).innerHTML = Size3;
-		this.ChangeInf(rowIndex);
-		return (newSize3);
-	},
-
-	ChangeInf : function (rowIndex){
-		var newSize1 = parseInt(document.getElementById("a-"+ rowIndex).innerHTML); 
-		var newSize2 = parseInt(document.getElementById("b-"+ rowIndex).innerHTML); 
-		var newSize3 = parseInt(document.getElementById("c-"+ rowIndex).innerHTML); 
-		var perimetrn = newSize1+newSize2+newSize3;
-		document.getElementById ("perimetr-"+ rowIndex).innerHTML = perimetrn;
-		var area=(0.25*Math.sqrt((newSize1 + newSize2 + newSize3)*(newSize1 + newSize2 - newSize3)*(newSize1 + newSize3 - newSize2)*(newSize2 + newSize3 - newSize1))).toFixed(5);
-		document.getElementById ("area-"+ rowIndex).innerHTML = area;
-		var cornabc=(Math.acos((newSize1*newSize1 + newSize2*newSize2 - newSize3*newSize3) / (2 * newSize1*newSize2)) * 180 / 3.14159265).toFixed(5);
-		var cornacb=(Math.acos((newSize1*newSize1 + newSize3*newSize3 - newSize2*newSize2) / (2 * newSize1*newSize3)) * 180 / 3.14159265).toFixed(5);
-		var cornbca = (Math.acos((newSize2*newSize2 + newSize3*newSize3 - newSize1*newSize1) / (2 * newSize2*newSize3)) * 180 / 3.14159265).toFixed(5);
-		return (perimetrn);
-	}, 
+	AddMy : function(){
+		var one1 = document.getElementById("edge1").value;
+		var two1 = document.getElementById("edge2").value;
+		var three1 = document.getElementById("edge3").value;
+		this.add(one1,two1,three1);
+	}
 }
 
